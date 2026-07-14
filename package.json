@@ -1,0 +1,19 @@
+{
+  "name": "logipulse-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server",
+    "routing-engine"
+  ],
+  "scripts": {
+    "build:routing": "npm run build --workspace=routing-engine",
+    "build:server": "npm run build --workspace=server",
+    "build:client": "npm run build --workspace=client",
+    "build": "npm run build:routing && npm run build:server && npm run build:client",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:client": "npm run dev --workspace=client",
+    "dev": "npm run dev --workspaces --parallel"
+  }
+}

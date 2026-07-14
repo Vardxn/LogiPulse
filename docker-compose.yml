@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # Relational Database: Postgres
+  # ==========================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: enterprise_cluster_postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
+      POSTGRES_DB: ${DATABASE_NAME:-logipulse}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - cluster_backbone_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ==========================================
+  # Document Database: MongoDB
+  # ==========================================
+  mongodb:
+    image: mongo:6.0
+    container_name: enterprise_cluster_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-mongo}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_NAME:-logipulse}
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27018:27017"
+    networks:
+      - cluster_backbone_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ==========================================
+  # Backend Services API: Server
+  # ==========================================
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: enterprise_cluster_server
+    ports:
+      - "5001:5001"
+    environment:
+      - DATABASE_URL=postgresql://${DATABASE_USER:-postgres}:${DATABASE_PASSWORD:-password}@postgres:5432/${DATABASE_NAME:-logipulse}?schema=public
+      - MONGO_URI=mongodb://${MONGO_ROOT_USER:-mongo}:${MONGO_ROOT_PASSWORD:-password}@mongodb:27017/${MONGO_DATABASE_NAME:-logipulse}?authSource=admin
+      - PORT=5001
+      - JWT_SECRET=${JWT_SECRET_SIGNING_KEY:-super-secret-token-change-me-in-production}
+    networks:
+      - cluster_backbone_net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    restart: always
+
+  # ==========================================
+  # Frontend Dashboard App: Client
+  # ==========================================
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: enterprise_cluster_client
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://server:5001
+      - PORT=3000
+    networks:
+      - cluster_backbone_net
+    depends_on:
+      server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    restart: always
+
+# ==========================================
+# Persistent Storage Volumes Definition
+# ==========================================
+volumes:
+  postgres_data:
+    driver: local
+  mongo_data:
+    driver: local
+
+# ==========================================
+# Isolated Network Topography Definition
+# ==========================================
+networks:
+  cluster_backbone_net:
+    driver: bridge
