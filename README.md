@@ -1,194 +1,92 @@
 <div align="center">
 
-# Hi there! I'm Vardan Pal 👋
-### Software Engineer | Full-Stack Developer
+# 🚚 LogiPulse
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=2DD4BF&center=true&vCenter=true&width=500&lines=Software+Engineer;Full-Stack+Developer;MERN+%2B+Next.js;Building+AI-integrated+systems)](https://git.io/typing-svg)
+**AI-Driven Multi-Modal Supply Chain Routing Engine**
 
-<br>
-
-<a href="https://linkedin.com/in/vardxn" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-</a>
-<a href="https://vardxn.vercel.app" target="_blank">
-  <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" />
-</a>
-<a href="mailto:vardan2701@gmail.com">
-  <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-</a>
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![OpenAI](https://img.shields.io/badge/GPT--4o-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 
 </div>
 
-<br>
+---
+
+## The Problem
+
+Modern supply chain logistics rely heavily on static routing models. Traditional systems fail to account for dynamic, real-world variables such as severe weather changes, sudden traffic congestion, and fluctuating fuel costs. Furthermore, processing shipping manifests is a notoriously manual and error-prone process, requiring human data entry that slows down the entire pipeline and introduces costly data corruption.
+
+## The Solution (LogiPulse)
+
+**LogiPulse** is an AI-powered logistics operating system designed to dynamically optimize supply chain routing and automate manifest extraction.
+
+To solve the routing bottleneck, LogiPulse implements custom Dijkstra and A* graph-routing algorithms over a 500+ node network, continuously ingesting live weather and fuel APIs to recalculate the most cost-effective and time-efficient paths in real-time. 
+
+To solve the manual data-entry problem, LogiPulse introduces a GPT-4o powered OCR and RAG pipeline. It instantly scans uploaded structured manifests, extracts the payload data, and automatically formats it for the routing engine, eliminating human error entirely.
 
 ---
 
-## 🙋‍♂️ About Me
+## 🌟 Key Features
 
-I am a final-year **B.Tech Information Technology** student at the **National Institute of Technology Srinagar (2022 - 2026)** and an aspiring Software Engineer. I recently completed a Software Engineering internship at **Noventiq (Umbrella Infotech)**, where I focused on building scalable backend REST APIs, optimizing databases, and deploying microservices.
-
-- 🎓 **Final-year B.Tech IT student** at NIT Srinagar (Class of 2026)
-- 💼 **Ex-Software Engineering Intern @ Noventiq** — specialized in backend APIs & microservices
-- 🔭 **Active Creator**: Building high-impact full-stack and AI-integrated systems
-- 🌱 **Algorithm Grind**: Currently sharpening my DSA fundamentals for technical interviews
-- 📍 **Available Immediately**: Open to relocate anywhere in India for Full-Time opportunities
-- 📫 **Reach me**: [vardan2701@gmail.com](mailto:vardan2701@gmail.com)
-
-<br>
+*   **Dynamic Graph Routing:** Custom Dijkstra/A* implementations scaling across 500+ nodes.
+*   **Live API Integration:** Real-time path cost adjustments based on weather and fuel pricing.
+*   **AI Manifest OCR:** GPT-4o integration to parse complex PDF and image manifests accurately.
+*   **Polyglot Persistence:** PostgreSQL for relational routing data and MongoDB for unstructured manifest storage.
+*   **Full-Stack Next.js:** High-performance, server-rendered logistics dashboard.
 
 ---
 
-## 🛠️ Technical Skill Matrix
+## 💻 Tech Stack
 
-### 💻 Languages
-<p align="left">
-  <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python" />
-  <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++" />
-  <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-</p>
-
-### 🌐 Frontend & Frameworks
-<p align="left">
-  <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React.js" />
-  <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-</p>
-
-### ⚙️ Backend & Systems
-<p align="left">
-  <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-  <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" alt="Express.js" />
-</p>
-
-### 🛢️ Databases
-<p align="left">
-  <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-  <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-</p>
-
-### ☁️ Cloud, DevOps & Tools
-<p align="left">
-  <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS" />
-  <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-  <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
-  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-</p>
-
-💡 **Certifications**: *AWS Certified Cloud Practitioner* | *AWS Certified AI Practitioner*
-
-<br>
+*   **Frontend:** Next.js, React, Tailwind CSS
+*   **Backend:** Node.js, TypeScript, Prisma ORM
+*   **Databases:** PostgreSQL (Routing data), MongoDB (Manifest logs)
+*   **AI / Integrations:** OpenAI GPT-4o, Weather API, Maps API
+*   **DevOps:** Docker, Docker Compose
 
 ---
 
-## 🚀 Featured Engineering Projects
+## 🚀 Getting Started
 
-<table border="1" width="100%">
-  <thead>
-    <tr style="background-color: #1e293b;">
-      <th width="33%" align="center">📂 Project & Scope</th>
-      <th width="47%" align="center">📝 Core Implementation</th>
-      <th width="20%" align="center">🛠️ Stack</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <strong><a href="https://github.com/Vardxn/HealthEase">🏥 HealthEase</a></strong>
-        <br><br>
-        AI-Integrated Telemedicine platform for medical digitization.
-      </td>
-      <td>
-        Built OCR engines to automatically digitize physical prescriptions, engineered role-based (RBAC) doctor/patient workflows, and deployed the microservice using Docker containers.
-      </td>
-      <td>
-        <img src="https://img.shields.io/badge/React-20232a?style=flat-square&logo=react&logoColor=61DAFB" /><br>
-        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong><a href="https://github.com/Vardxn/Mohishree">🏢 Mohishree Facility Services</a></strong>
-        <br><br>
-        B2B Facility Management & Procurement Marketplace.
-      </td>
-      <td>
-        Designed Quotation-to-Order lifecycle pipelines, complex multi-step vendor onboarding wizards, and implemented high-performance SEO using Next.js Server-Side Rendering (SSR).
-      </td>
-      <td>
-        <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/Postgres-316192?style=flat-square&logo=postgresql&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&logo=tailwindcss&logoColor=white" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong><a href="https://github.com/Vardxn/LogiPulse">🚚 LogiPulse</a></strong>
-        <br><br>
-        AI-powered Multi-Modal Supply Chain Routing Engine.
-      </td>
-      <td>
-        Engineered custom Dijkstra & A* graph-routing engines for route cost/congestions, built a deterministic 0.4/0.3/0.3 weighted OCR confidence verification gate, and set up multi-tenant DB isolation.
-      </td>
-      <td>
-        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/Postgres-316192?style=flat-square&logo=postgresql&logoColor=white" /><br>
-        <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" />
-      </td>
-    </tr>
-  </tbody>
-</table>
+### Local Installation
 
-<br>
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Vardxn/LogiPulse.git
+   cd LogiPulse
+   ```
+
+2. **Install dependencies (Monorepo):**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Create `.env` files in the respective directories containing:
+   ```env
+   DATABASE_URL="postgresql://user:pass@localhost:5432/logipulse"
+   MONGO_URI="mongodb://localhost:27017/logipulse"
+   OPENAI_API_KEY="sk-..."
+   ```
+
+4. **Run via Docker Compose:**
+   ```bash
+   docker-compose up -d --build
+   ```
+
+5. **Start the Development Servers:**
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## 📊 Git Telemetry & Stats
+## 👨‍💻 Author
 
-<div align="center">
-  <table border="0">
-    <tr>
-      <td>
-        <img src="https://github-readme-stats.vercel.app/api?username=Vardxn&show_icons=true&theme=tokyonight&count_private=true" alt="Vardxn Github Stats" width="400" />
-      </td>
-      <td>
-        <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vardxn&theme=tokyonight" alt="Vardxn Streak Stats" width="400" />
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center">
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vardxn&layout=compact&theme=tokyonight&langs_count=6" alt="Vardxn Top Languages" width="500" />
-      </td>
-    </tr>
-  </table>
-</div>
+**Vardan Pal**
 
-<br>
-
----
-
-<div align="center">
-
-### 🤝 Connect with me
-
-<a href="https://linkedin.com/in/vardxn" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-</a>
-<a href="https://vardxn.vercel.app" target="_blank">
-  <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" />
-</a>
-<a href="mailto:vardan2701@gmail.com">
-  <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-</a>
-
-<br>
-<br>
-
-![Profile Views](https://komarev.com/ghpvc/?username=Vardxn&color=2dd4bf&style=flat-square&label=Profile+Views)
-
-</div>
+* **LinkedIn:** [linkedin.com/in/vardxn](https://linkedin.com/in/vardxn)
+* **GitHub:** [@vardxn](https://github.com/vardxn)
+* **Portfolio:** [vardxn.vercel.app](https://vardxn.vercel.app)
