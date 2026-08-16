@@ -5,7 +5,7 @@ services:
   # Relational Database: Postgres
   # ==========================================
   postgres:
-    image: postgres:15-alpine
+    image: pgvector/pgvector:pg15
     container_name: enterprise_cluster_postgres
     environment:
       POSTGRES_USER: ${DATABASE_USER:-postgres}
@@ -19,6 +19,23 @@ services:
       - cluster_backbone_net
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ==========================================
+  # In-Memory Data Store: Redis (Rate Limiting)
+  # ==========================================
+  redis:
+    image: redis:7-alpine
+    container_name: enterprise_cluster_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - cluster_backbone_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5

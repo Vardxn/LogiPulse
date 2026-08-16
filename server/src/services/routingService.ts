@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import mongoose from "mongoose";
 import { computeRoute, Graph, EdgeConditions } from "routing-engine";
+import { routingEngineLatency } from "../utils/metrics";
 
 const prisma = new PrismaClient();
 
@@ -87,7 +88,9 @@ export async function computeAndSaveRoute(
   }
 
   // 4. Fire compute execution through the routing module
+  const end = routingEngineLatency.startTimer();
   const routeResult = computeRoute(graph, startNodeId, endNodeId, conditionsMap, strategy);
+  end();
 
   // 5. Upsert the computed structural matrix into Postgres via Prisma
   const savedRoute = await prisma.shipmentRoute.upsert({

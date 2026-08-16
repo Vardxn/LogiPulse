@@ -1,5 +1,8 @@
-import { OpenAI } from "openai";
+import { TelemetryOpenAI } from "../utils/llmWrapper";
+import { ocrPipelineLatency } from "../utils/metrics";
 import { GoogleCloudVisionAPI } from "../utils/visionApi";
+import { RAGService } from "./ragService";
+import { OcrDeadLetterQueue } from "../models/ocrDeadLetterQueue";
 
 export interface ExtractedBolData {
   vendorName?: string;
@@ -17,15 +20,18 @@ export interface ExtractedBolData {
 }
 
 export class ExtractionService {
-  private openai: OpenAI;
+  private openai: TelemetryOpenAI;
   private visionApi: GoogleCloudVisionAPI;
+  private ragService: RAGService;
 
   constructor() {
-    this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "dummy-key" });
+    this.openai = new TelemetryOpenAI();
     this.visionApi = new GoogleCloudVisionAPI();
+    this.ragService = new RAGService();
   }
 
-  public async extractDocumentData(fileBuffer: Buffer): Promise<ExtractedBolData> {
+  public async extractDocumentData(fileBuffer: Buffer, bolRecordId?: string): Promise<ExtractedBolData> {
+    const end = ocrPipelineLatency.startTimer();
     try {
       // 1. Perform foundational text layout parsing using Google Cloud Vision API
       const rawOcrText = await this.visionApi.extractRawText(fileBuffer);
@@ -34,7 +40,7 @@ export class ExtractionService {
       }
 
       // 2. Structured output extraction via GPT-4o using a strict JSON Schema format (derived from healtease)
-      const response = await this.openai.chat.completions.create({
+      const response = await this.openai.createChatCompletion({
         model: "gpt-4o",
         temperature: 0,
         response_format: {
@@ -80,12 +86,29 @@ export class ExtractionService {
             content: `Raw OCR document input stream to normalize:\n\n${rawOcrText}`
           }
         ]
-      });
+      }, "extractDocumentData");
 
       const parsedResponse: ExtractedBolData = JSON.parse(response.choices[0].message.content || "{}");
+      
+      // 3. Store raw text into RAG pipeline for hybrid retrieval if bolRecordId is provided
+      if (bolRecordId) {
+        await this.ragService.processAndStoreDocument(bolRecordId, rawOcrText);
+      }
+      
+      end();
       return parsedResponse;
     } catch (err: any) {
+      end();
       console.error("[Extraction Pipeline Failure]:", err.message);
+      
+      // Store in DLQ for manual intervention or replay
+      await OcrDeadLetterQueue.create({
+        bolRecordId: bolRecordId,
+        errorMessage: err.message,
+        stackTrace: err.stack,
+        status: 'PENDING'
+      });
+
       return { error: "Failed to cleanly orchestrate document AI ingestion steps: " + err.message };
     }
   }
