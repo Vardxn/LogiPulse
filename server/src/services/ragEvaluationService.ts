@@ -31,7 +31,7 @@ export class RAGEvaluationService {
 
     for (const test of goldenQuestions) {
       // 1. Retrieve contexts via Hybrid Search
-      const results: any[] = await ragService.hybridSearch(test.question, bolRecordId);
+      const results = (await ragService.hybridSearch(test.question, bolRecordId)) as any[];
       const contexts = results.map(r => r.content).join("\n");
 
       // 2. Generate Answer

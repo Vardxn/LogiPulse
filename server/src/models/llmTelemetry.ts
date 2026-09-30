@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export interface ILLMTelemetry extends mongoose.Document {
+export interface ILLMTelemetry extends Omit<mongoose.Document, "model"> {
   endpoint: string;
   model: string;
   promptTokens: number;

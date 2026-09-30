@@ -85,7 +85,7 @@ export class RAGService {
   public async askQuestion(query: string, bolRecordId: string) {
     const end = ragQueryLatency.startTimer();
     try {
-      const searchResults: any[] = await this.hybridSearch(query, bolRecordId, 0.5, 5);
+      const searchResults = (await this.hybridSearch(query, bolRecordId, 0.5, 5)) as any[];
       
       // Provide contexts with explicit IDs for citation
       const contextBlocks = searchResults.map((r, idx) => `[ChunkID: ${r.id}]\n${r.content}`).join("\n\n---\n\n");
